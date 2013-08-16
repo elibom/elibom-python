@@ -38,13 +38,13 @@ You are now ready to start calling the API methods!
 
 ### Send SMS
 ```python
-deliveryToken = elibom.send_message('573017897304', 'test message')
+deliveryToken = elibom.send_message('57xxxxxxxxxx', 'test message')
 # all methods return a hash or raise exceptions if there is a error response
 ```
 
 ### Schedule SMS 
 ```python
-scheduleId = elibom.schedule_message('573017897304', 'test message', '2013-08-14 23:00')
+scheduleId = elibom.schedule_message('57xxxxxxxxxx', 'test message', '2013-08-14 23:00')
 ```
 
 ### Show Delivery
