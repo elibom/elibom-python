@@ -12,7 +12,7 @@ class ElibomClient(object):
 	"""
 	 Python Elibom API client
 	"""
-	__api_base_url = 'http://www.elibom.com/'
+	__api_base_url = 'https://www.elibom.com/'
 	
 	def __init__(self, user, password):
 		"""
@@ -77,7 +77,7 @@ class ElibomClient(object):
 			Attributes:
 			 deliveryToken: the delivery identification token
 		"""
-		response = requests.get(self.__api_base_url + 'messages/' + deliveryToken, auth=(self.user, self.password))
+		response = requests.get(self.__api_base_url + 'messages/' + str(deliveryToken), auth=(self.user, self.password))
 		if response.ok:
 			return json.loads(response.content, encoding='utf-8')
 		else:
@@ -89,7 +89,7 @@ class ElibomClient(object):
 			Attributes:
 		 	  scheduleId: the schedule identifier. 
 		"""
-		response = requests.get(self.__api_base_url + 'schedules/' + scheduleId, auth=(self.user, self.password))
+		response = requests.get(self.__api_base_url + 'schedules/' + str(scheduleId), auth=(self.user, self.password))
 		if response.ok:
 			return json.loads(response.content, encoding='utf-8')
 		else:
@@ -112,7 +112,7 @@ class ElibomClient(object):
 		Attributes:
 		   scheduleId: the schedule identifier.
 		"""
-		response = requests.delete(self.__api_base_url + 'schedules/' + scheduleId, auth=(self.user, self.password))
+		response = requests.delete(self.__api_base_url + 'schedules/' + str(scheduleId), auth=(self.user, self.password))
 		if response.ok:
 			return scheduleId
 		else:
@@ -123,16 +123,6 @@ class ElibomClient(object):
 			Method used to query the account details.
 		"""
 		response = requests.get(self.__api_base_url + 'account',  auth=(self.user, self.password))
-		if response.ok:
-			return json.loads(response.content, encoding='utf-8')
-		else:
-			self.__manage_error_response(response)
-	
-	def show_users(self):
-		"""
-		  Method used to list the users associated to the current account.
-		"""
-		response = requests.get(self.__api_base_url + 'users', auth=(self.user, self.password))
 		if response.ok:
 			return json.loads(response.content, encoding='utf-8')
 		else:
@@ -150,6 +140,16 @@ class ElibomClient(object):
 		else:
 			self.__manage_error_response(response)
 	
+	def show_users(self):
+		"""
+		  Method used to list the users associated to the current account.
+		"""
+		response = requests.get(self.__api_base_url + 'users', auth=(self.user, self.password))
+		if response.ok:
+			return json.loads(response.content, encoding='utf-8')
+		else:
+			self.__manage_error_response(response)
+			
 	def __manage_error_response(self, response):
 		if response.status_code == 400:
 			raise ElibomClientException('Bad request: ' + response.reason)
@@ -203,6 +203,7 @@ class ElibomClientException(Exception):
 		
 	def __str__(self):
 		return repr(self.value)
+	
 def prettyPrint(jsonObj):
 	print json.dumps(jsonObj, sort_keys=True, indent=4, separators=(',', ': '))
 		
