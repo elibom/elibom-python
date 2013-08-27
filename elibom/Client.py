@@ -208,12 +208,12 @@ def prettyPrint(jsonObj):
 	print json.dumps(jsonObj, sort_keys=True, indent=4, separators=(',', ': '))
 		
 if __name__ == '__main__':
-	elibom = ElibomClient('alejandro.riveros@elibom.com', '1234qwerasDF')
-	# deliveryToken = elibom.send_message('573017897304', 'test message')
+	elibom = ElibomClient('XXX', 'XXX')
+	# deliveryToken = elibom.send_message('57XXX', 'test message')
 	deliveryToken = '5077137650034425759'
 	delivery = elibom.show_delivery(deliveryToken);
 	prettyPrint(delivery)  
-	scheduleId = elibom.schedule_message('573017897304', 'test message', '2013-08-14 23:00')
+	scheduleId = elibom.schedule_message('57XXX', 'test message', '2013-08-14 23:00')
 	schedules = elibom.list_schedules()
 	prettyPrint(schedules)
 	elibom.cancel_schedule(scheduleId)
