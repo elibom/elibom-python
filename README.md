@@ -1,5 +1,6 @@
 Elibom Python API Client
 ===========
+[![Build Status](https://travis-ci.org/elibom/elibom-python.png)](https://travis-ci.org/elibom/elibom-python)
 
 A python client of the Elibom REST API. [The full API reference is here](http://www.elibom.com/developers/reference).
 
@@ -66,6 +67,7 @@ elibom.cancel_schedule(scheduleId)
 ```python
 users = elibom.show_users()
 ```
+.
 
 ### Show User
 ```python
