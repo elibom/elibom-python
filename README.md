@@ -66,7 +66,6 @@ elibom.cancel_schedule(scheduleId)
 ```python
 users = elibom.show_users()
 ```
-.
 
 ### Show User
 ```python
