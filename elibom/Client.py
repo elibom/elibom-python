@@ -155,6 +155,8 @@ class ElibomClient(object):
 			raise ElibomClientException('Bad request: ' + response.reason)
 		elif response.status_code == 401:
 			raise ElibomClientException('Unauthorized, check your credentials')
+		elif response.status_code == 404:
+			raise ElibomClientException('Resource Not found')
 		elif response.status_code >= 500:
 			raise ElibomClientException('Server error, try later')
 		else:
