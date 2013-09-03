@@ -7,7 +7,7 @@ Created on Aug 15, 2013
 from setuptools import setup, find_packages
 
 setup(
-    name='PyElibom',
+    name='elibom',
     version='1.0',
     description='Elibom API Python Client v1',
     author='Alejandro Riveros Cruz',
