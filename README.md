@@ -9,9 +9,8 @@ A python client of the Elibom REST API. [The full API reference is here](http://
 
 1\. Install the egg
 
-```python
-python setup.py build
-python setup.py install
+```bash
+sudo pip install pyElibom
 ```
 
 2\. Configure the `ElibomClient` object passing your credentials.
@@ -67,7 +66,6 @@ elibom.cancel_schedule(scheduleId)
 ```python
 users = elibom.show_users()
 ```
-.
 
 ### Show User
 ```python
