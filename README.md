@@ -10,7 +10,7 @@ A python client of the Elibom REST API. [The full API reference is here](http://
 1\. Install the egg
 
 ```bash
-sudo pip install pyElibom
+sudo pip install elibom
 ```
 
 2\. Configure the `ElibomClient` object passing your credentials.
