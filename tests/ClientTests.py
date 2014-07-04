@@ -98,7 +98,7 @@ class ElibomClientTests(unittest.TestCase):
 	def test_should_schedule_message(self, mock_requests):
 		mock_requests.post = mock_post 
 		elibom = ElibomClient('user@domain.com', 'password')
-		scheduleId = elibom.schedule_message('573017897304', 'test message', '2013-09-27 23:00')
+		scheduleId = elibom.schedule_message('573017897304', 'test message', '2015-09-27 23:00')
 		self.assertEqual(456, scheduleId, 'scheduleId must be equal to 456')
 		
 	@patch('elibom.Client.requests')
