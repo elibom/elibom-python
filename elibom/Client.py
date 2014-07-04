@@ -28,11 +28,14 @@ class ElibomClient(object):
 		"""
 		Method for send a message
 		Attributes:
-		 destination: one or more comma separated valid destination numbers
+		 destination: one or more comma separated valid destination numbers,
+					  valid destination are numbers of a least 10 digits,
+					  contacts or groups in the form 'c#' or 'g#' respectively
+					  where # corresponds to a valid id
 		 text: the message text
 		"""
 		if not self.__is_valid_destination(destination):
-			raise ElibomClientException('Invalid destination, cannot be None, and must be composed of a least 10 digits.')
+			raise ElibomClientException('Invalid destination, cannot be None, and must be separated with commas')
 		if not self.__is_valid_text(text):
 			raise ElibomClientException('Invalid text, cannot be None, and must not be empty')
 		
@@ -165,10 +168,11 @@ class ElibomClient(object):
 	def __is_valid_destination(self, destination):
 		if destination is None:
 			return False
-		if not destination.isdigit():
-			return False
-		if len(destination) < 10:
-			return False
+		destination_splited = destination.split(',')
+		for dest in destination_splited:
+			dest = dest.strip()
+			if not (re.match('(c|g)[0-9]+',dest) or re.match('[0-9]{10,}',dest)):
+				return False
 		return True
 	
 	def __is_valid_text(self, text):

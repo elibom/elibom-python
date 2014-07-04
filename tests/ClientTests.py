@@ -71,6 +71,14 @@ class ElibomClientTests(unittest.TestCase):
 	def test_send_message_args(self):
 		elibom = ElibomClient('', '')
 		self.assertRaises(ElibomClientException, elibom.send_message, '573097304', 'test')
+
+	def test_should_fail_because_invalid_destination(self):
+		elibom = ElibomClient('', '')
+		self.assertRaises(ElibomClientException, elibom.send_message, '', '')
+		self.assertRaises(ElibomClientException, elibom.send_message, 'cc', '')
+		self.assertRaises(ElibomClientException, elibom.send_message, 'gg', '')
+		self.assertRaises(ElibomClientException, elibom.send_message, '123', '')
+		self.assertRaises(ElibomClientException, elibom.send_message, 'g123 33', '')
 	
 	@patch('elibom.Client.requests')
 	def test_should_send_message(self, mock_requests):
@@ -78,6 +86,13 @@ class ElibomClientTests(unittest.TestCase):
 		elibom = ElibomClient('user@domain.com', 'password')
 		deliveryToken = elibom.send_message('573017897304', 'test')
 		self.assertEqual(123, deliveryToken, 'deliveryToken must be equal to 123')
+		deliveryToken = elibom.send_message('573017897304,573017897304', 'test')
+		self.assertEqual(123, deliveryToken, 'deliveryToken must be equal to 123')
+		deliveryToken = elibom.send_message('g123', 'test')
+		self.assertEqual(123, deliveryToken, 'deliveryToken must be equal to 123')
+		deliveryToken = elibom.send_message('c123', 'test')
+		self.assertEqual(123, deliveryToken, 'deliveryToken must be equal to 123')
+
 		
 	@patch('elibom.Client.requests')
 	def test_should_schedule_message(self, mock_requests):
