@@ -14,6 +14,7 @@ class ElibomClient(object):
 	 Python Elibom API client
 	"""
 	__api_base_url = 'https://www.elibom.com/'
+	__headers = {'X-API-Source': 'python-1.2'}
 	
 	def __init__(self, user, password):
 		"""
@@ -41,7 +42,7 @@ class ElibomClient(object):
 			raise ElibomClientException('Invalid text, cannot be None, and must not be empty')
 		
 		payload = json.dumps({'destination':destination, 'text':text}) 
-		response = requests.post(self.__api_base_url + 'messages', payload, auth=(self.user, self.password))
+		response = requests.post(self.__api_base_url + 'messages', payload, auth=(self.user, self.password),headers=self.__headers)
 		if response.ok:
 			response_content = json.loads(response.content, encoding='utf-8')
 			return response_content['deliveryToken']
@@ -67,7 +68,7 @@ class ElibomClient(object):
 			raise ElibomClientException('Invalid schedule_date cannot be in the past')
 			
 		payload = json.dumps({'destination':destination, 'text':text, 'scheduledDate':scheduled_date}) 
-		response = requests.post(self.__api_base_url + 'messages', payload, auth=(self.user, self.password))
+		response = requests.post(self.__api_base_url + 'messages', payload, auth=(self.user, self.password),headers=self.__headers)
 		if response.ok:
 			response_content = json.loads(response.content, encoding='utf-8')
 			return response_content['scheduleId']
@@ -81,7 +82,7 @@ class ElibomClient(object):
 			Attributes:
 			 deliveryToken: the delivery identification token
 		"""
-		response = requests.get(self.__api_base_url + 'messages/' + str(deliveryToken), auth=(self.user, self.password))
+		response = requests.get(self.__api_base_url + 'messages/' + str(deliveryToken), auth=(self.user, self.password),headers=self.__headers)
 		if response.ok:
 			return json.loads(response.content, encoding='utf-8')
 		else:
@@ -93,7 +94,7 @@ class ElibomClient(object):
 			Attributes:
 		 	  scheduleId: the schedule identifier. 
 		"""
-		response = requests.get(self.__api_base_url + 'schedules/' + str(scheduleId), auth=(self.user, self.password))
+		response = requests.get(self.__api_base_url + 'schedules/' + str(scheduleId), auth=(self.user, self.password),headers=self.__headers)
 		if response.ok:
 			return json.loads(response.content, encoding='utf-8')
 		else:
@@ -103,7 +104,7 @@ class ElibomClient(object):
 		"""
 		Method used to list the available schedules.
 		"""
-		response = requests.get(self.__api_base_url + 'schedules/scheduled', auth=(self.user, self.password))
+		response = requests.get(self.__api_base_url + 'schedules/scheduled', auth=(self.user, self.password),headers=self.__headers)
 		if response.ok:
 			return json.loads(response.content, encoding='utf-8')
 		else:
@@ -116,7 +117,7 @@ class ElibomClient(object):
 		Attributes:
 		   scheduleId: the schedule identifier.
 		"""
-		response = requests.delete(self.__api_base_url + 'schedules/' + str(scheduleId), auth=(self.user, self.password))
+		response = requests.delete(self.__api_base_url + 'schedules/' + str(scheduleId), auth=(self.user, self.password),headers=self.__headers)
 		if response.ok:
 			return scheduleId
 		else:
@@ -126,7 +127,7 @@ class ElibomClient(object):
 		"""
 			Method used to query the account details.
 		"""
-		response = requests.get(self.__api_base_url + 'account',  auth=(self.user, self.password))
+		response = requests.get(self.__api_base_url + 'account',  auth=(self.user, self.password),headers=self.__headers)
 		if response.ok:
 			return json.loads(response.content, encoding='utf-8')
 		else:
@@ -138,7 +139,7 @@ class ElibomClient(object):
 		  Attributes:
 		 	  userId: the user identifier.
 		"""
-		response = requests.get(self.__api_base_url + 'users/' + str(userId), auth=(self.user, self.password))
+		response = requests.get(self.__api_base_url + 'users/' + str(userId), auth=(self.user, self.password),headers=self.__headers)
 		if response.ok:
 			return json.loads(response.content, encoding='utf-8')
 		else:
@@ -148,7 +149,7 @@ class ElibomClient(object):
 		"""
 		  Method used to list the users associated to the current account.
 		"""
-		response = requests.get(self.__api_base_url + 'users', auth=(self.user, self.password))
+		response = requests.get(self.__api_base_url + 'users', auth=(self.user, self.password),headers=self.__headers)
 		if response.ok:
 			return json.loads(response.content, encoding='utf-8')
 		else:

@@ -8,8 +8,8 @@ from setuptools import setup, find_packages
 
 setup(
     name='elibom',
-    version='1.1',
-    description='Elibom API Python Client v1.1',
+    version='1.2',
+    description='Elibom API Python Client v1.2',
     author='Alejandro Riveros Cruz',
     author_email='lariverosc@gmail.com',
     url='http://www.elibom.com',
