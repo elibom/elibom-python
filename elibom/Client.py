@@ -43,7 +43,7 @@ class ElibomClient(object):
 		payload = json.dumps({'destination':destination, 'text':text}) 
 		response = requests.post(self.__api_base_url + 'messages', payload, auth=(self.user, self.password))
 		if response.ok:
-			response_content = json.loads(response.content, encoding='utf-8')
+			response_content = json.loads(response.text, encoding='utf-8')
 			return response_content['deliveryToken']
 		else:
 			self.__manage_error_response(response)
@@ -69,7 +69,7 @@ class ElibomClient(object):
 		payload = json.dumps({'destination':destination, 'text':text, 'scheduledDate':scheduled_date}) 
 		response = requests.post(self.__api_base_url + 'messages', payload, auth=(self.user, self.password))
 		if response.ok:
-			response_content = json.loads(response.content, encoding='utf-8')
+			response_content = json.loads(response.text, encoding='utf-8')
 			return response_content['scheduleId']
 		else:
 			self.__manage_error_response(response)
@@ -83,7 +83,7 @@ class ElibomClient(object):
 		"""
 		response = requests.get(self.__api_base_url + 'messages/' + str(deliveryToken), auth=(self.user, self.password))
 		if response.ok:
-			return json.loads(response.content, encoding='utf-8')
+			return json.loads(response.text, encoding='utf-8')
 		else:
 			self.__manage_error_response(response)
 	
@@ -95,7 +95,7 @@ class ElibomClient(object):
 		"""
 		response = requests.get(self.__api_base_url + 'schedules/' + str(scheduleId), auth=(self.user, self.password))
 		if response.ok:
-			return json.loads(response.content, encoding='utf-8')
+			return json.loads(response.text, encoding='utf-8')
 		else:
 			self.__manage_error_response(response)
 	
@@ -105,7 +105,7 @@ class ElibomClient(object):
 		"""
 		response = requests.get(self.__api_base_url + 'schedules/scheduled', auth=(self.user, self.password))
 		if response.ok:
-			return json.loads(response.content, encoding='utf-8')
+			return json.loads(response.text, encoding='utf-8')
 		else:
 			self.__manage_error_response(response)
 	
@@ -128,7 +128,7 @@ class ElibomClient(object):
 		"""
 		response = requests.get(self.__api_base_url + 'account',  auth=(self.user, self.password))
 		if response.ok:
-			return json.loads(response.content, encoding='utf-8')
+			return json.loads(response.text, encoding='utf-8')
 		else:
 			self.__manage_error_response(response)
 	
@@ -140,7 +140,7 @@ class ElibomClient(object):
 		"""
 		response = requests.get(self.__api_base_url + 'users/' + str(userId), auth=(self.user, self.password))
 		if response.ok:
-			return json.loads(response.content, encoding='utf-8')
+			return json.loads(response.text, encoding='utf-8')
 		else:
 			self.__manage_error_response(response)
 	
@@ -150,7 +150,7 @@ class ElibomClient(object):
 		"""
 		response = requests.get(self.__api_base_url + 'users', auth=(self.user, self.password))
 		if response.ok:
-			return json.loads(response.content, encoding='utf-8')
+			return json.loads(response.text, encoding='utf-8')
 		else:
 			self.__manage_error_response(response)
 			
@@ -212,7 +212,7 @@ class ElibomClientException(Exception):
 		return repr(self.value)
 	
 def prettyPrint(jsonObj):
-	print json.dumps(jsonObj, sort_keys=True, indent=4, separators=(',', ': '))
+	print(json.dumps(jsonObj, sort_keys=True, indent=4, separators=(',', ': ')))
 		
 if __name__ == '__main__':
 	elibom = ElibomClient('XXX', 'XXX')
