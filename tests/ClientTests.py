@@ -17,9 +17,9 @@ def mock_post(url, data=None, **kwargs):
 		response.ok = True
 		payload = json.loads(data, encoding='utf-8')
 		if 'scheduledDate' in payload:
-			response.content = json.dumps({'scheduleId':456})
+			response.text = json.dumps({'scheduleId':456})
 		else:
-			response.content = json.dumps({'deliveryToken':123})
+			response.text = json.dumps({'deliveryToken':123})
 		return response
 	
 
@@ -27,32 +27,32 @@ def mock_get(url, data=None, **kwargs):
 	if url.endswith('messages/123'):
 		response = MockResponse()
 		response.ok = True
-		response.content = json.dumps({'deliveryId': 123, 'status': 'finished', 'numSent': 1, 'numFailed': 0})
+		response.text = json.dumps({'deliveryId': 123, 'status': 'finished', 'numSent': 1, 'numFailed': 0})
 		return response
 	elif url.endswith('schedules/456'):
 		response = MockResponse()
 		response.ok = True
-		response.content = json.dumps({'id': 456, 'status': 'scheduled', 'isFile': True, 'fileName': 'test.xls', 'fileHasText':False, 'text':'test'})
+		response.text = json.dumps({'id': 456, 'status': 'scheduled', 'isFile': True, 'fileName': 'test.xls', 'fileHasText':False, 'text':'test'})
 		return response
 	elif url.endswith('schedules/scheduled'):
 		response = MockResponse()
 		response.ok = True
-		response.content = json.dumps([{ 'id': 456,'isFile': True,'fileName': 'test.xls','fileHasText': False,'text': 'test' },{ 'id': 457,'isFile': True,'fileName': 'test.xls','fileHasText': False,'text': 'test'}])
+		response.text = json.dumps([{ 'id': 456,'isFile': True,'fileName': 'test.xls','fileHasText': False,'text': 'test' },{ 'id': 457,'isFile': True,'fileName': 'test.xls','fileHasText': False,'text': 'test'}])
 		return response
 	elif url.endswith('account'):
 		response = MockResponse()
 		response.ok = True
-		response.content = json.dumps({'name':'test','credits':10.0})
+		response.text = json.dumps({'name':'test','credits':10.0})
 		return response
 	elif  url.endswith('users/1'):
 		response = MockResponse()
 		response.ok = True
-		response.content = json.dumps({'id':1,'name':'testUser','email':'test@dominio.com','status':'active'})
+		response.text = json.dumps({'id':1,'name':'testUser','email':'test@dominio.com','status':'active'})
 		return response
 	elif  url.endswith('users'):
 		response = MockResponse()
 		response.ok = True
-		response.content = json.dumps([{'id':1,'name':'testUser','email':'test@dominio.com','status':'active'},{'id':2,'name':'testUser2','email':'test2@dominio.com','status':'active'}])
+		response.text = json.dumps([{'id':1,'name':'testUser','email':'test@dominio.com','status':'active'},{'id':2,'name':'testUser2','email':'test2@dominio.com','status':'active'}])
 		return response
 	
 def mock_delete(url, data=None, **kwargs):
